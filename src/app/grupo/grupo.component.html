@@ -1,3 +1,77 @@
-<p>
-  grupo works!
-</p>
+<div class="grupo-input">
+  
+      <label>Nome do Lider
+          <input [(ngModel)]="grupo.nomeLider" placeholder="nome">
+      </label>
+      <p>
+        <label>Contacto 
+            <input [(ngModel)]="grupo.contacto" type="number" placeholder="">
+        </label>
+    </p>
+      <p>
+          <label>Data do encontro <!-- nao eh obrigatorio este camppo -->
+              <input [(ngModel)]="grupo.data" placeholder="ex.: quinta-feira pelas 15h">
+          </label>
+      </p>
+  
+      <p>
+      <label>Descricao
+        <textarea [(ngModel)]="grupo.descricao" placeholder="descricao">
+        </textarea>
+      </label>
+      <label>imagem
+        <input [(ngModel)]="grupo.imagem" type="file">
+      </label>
+  </p>
+  </div>
+
+  
+  
+   <app-grupo-detail [grupo]="selectedGrupo"></app-grupo-detail> 
+  
+  <div class="row">
+      <div class="col-xs-12">
+        <div class="box">
+          <div class="box-header">
+            <h2>grupos</h2>
+  
+            <div class="box-tools">
+              <div class="input-group input-group-sm" style="width: 150px;">
+                <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+  
+                <div class="input-group-btn">
+                  <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /.box-header -->
+          <div class="box-body table-responsive no-padding">
+            <table class="table table-hover">
+              <tr>
+                <th>Nome do Lider</th>
+                <th>Contacto</th>
+                <th>Data do encontro</th>
+                <th>Descricao</th>
+            <!--    <th>imagem</th> -->
+                
+              </tr>
+                              
+                                  <tr *ngFor= "let grupo of grupos" [class.selected]="grupo === selectedGrupo" 
+                                  (click)="onSelect(grupo)">
+                                  <td>{{grupo.nomeLider}}</td>
+                                  <td>{{grupo.contacto}}</td>
+                                  <td>{{grupo.data}}</td>
+                                  <td>{{grupo.descricao}}</td>
+                               <!--    <td><img [src]="grupo.imagem"></td> -->   
+                              </tr>
+                             
+                          
+            </table>
+          </div>
+          <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+      </div>
+    </div>
+  

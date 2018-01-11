@@ -1,3 +1,31 @@
-<p>
-  grupo-detail works!
+<div *ngIf="grupo">
+  
+  
+   <label>Nome do Lider
+       <input [(ngModel)]="grupo.nomeLider" placeholder="">
+   </label>
+   <p>
+     <label>Contacto
+       <input [(ngModel)]="grupo.contacto" type="number">
+     </label>
+   </p>
+   <p>
+       <label>Data do grupo
+           <input [(ngModel)]="grupo.data"  placeholder="ex. quinta feira pelas 12h">
+       </label>
+   </p>
+
+   <p>
+   <label>Descricao
+     <textarea [(ngModel)]="grupo.descricao" placeholder="descricao">
+     </textarea>
+   </label>
 </p>
+<p>
+  <label>Imagem
+<!--     <img [src]="grupo.imagem"> -->
+      <input [(ngModel)]="grupo.imagem" type="file">
+  </label>
+</p> 
+
+</div>

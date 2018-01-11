@@ -12,6 +12,7 @@ import {EventoService} from './evento.service';
 import { AppRoutingModule } from './/app-routing.module';
 import { GrupoComponent } from './grupo/grupo.component';
 import { GrupoDetailComponent } from './grupo-detail/grupo-detail.component';
+import {GrupoService } from './grupo.service';
 
 
 @NgModule({
@@ -31,7 +32,7 @@ import { GrupoDetailComponent } from './grupo-detail/grupo-detail.component';
     AppRoutingModule
   ],
   providers: [
-    EventoService
+    EventoService,GrupoService
   ],
   bootstrap: [AppComponent]
 })

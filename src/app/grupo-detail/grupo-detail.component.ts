@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Grupo} from '../grupo';
 
 @Component({
   selector: 'app-grupo-detail',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GrupoDetailComponent implements OnInit {
 
+  @Input() grupo:Grupo;
   constructor() { }
+
 
   ngOnInit() {
   }

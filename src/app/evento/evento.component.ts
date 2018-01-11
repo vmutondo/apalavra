@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Evento } from '../evento';
-import {EVENTOS} from '../test-eventos';
+
+import { EventoService} from '../evento.service';
 
 @Component({
   selector: 'app-evento',
@@ -9,14 +10,24 @@ import {EVENTOS} from '../test-eventos';
 })
 export class EventoComponent implements OnInit {
 
-eventos:any;
+eventos:Evento[];
 evento:any = {"titulo":""}
-  constructor() { }
+selectedEvento:Evento;
+  constructor(private eventoService: EventoService) {
+
+   }
 
   ngOnInit() {
-  this.eventos = EVENTOS;
-    
-    console.log(this.eventos)
+  this.getEventos();
+  }
+
+  onSelect(evento:Evento): void{
+    this.selectedEvento = evento;
+
+  }
+
+  getEventos(): void {
+    this.eventoService.getEventos().subscribe(eventos => this.eventos = eventos);
   }
 
 }

@@ -1,62 +1,68 @@
 <div class="evento-input">
-
-    <label>Titulo
-        <input [(ngModel)]="evento.titulo" placeholder="titulo">
-    </label>
-    <p>
-        <label>Data do evento
-            <input type="date" placeholder="data do evento">
-        </label>
-    </p>
-
-    <p>
-    <label>Descricao
-        <input [(ngModel)]="evento.descricao" placeholder="descricao">
-    </label>
-</p>
-</div>
-<h3>{{evento.titulo}}</h3>
-<h3>{{evento.descricao}}</h3>
-
-<div class="row">
-    <div class="col-xs-12">
-      <div class="box">
-        <div class="box-header">
-          <h2>Eventos</h2>
-
-          <div class="box-tools">
-            <div class="input-group input-group-sm" style="width: 150px;">
-              <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
-
-              <div class="input-group-btn">
-                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+  
+      <label>Titulo
+          <input [(ngModel)]="evento.titulo" placeholder="titulo">
+      </label>
+      <p>
+          <label>Data do evento
+              <input type="date" placeholder="data do evento">
+          </label>
+      </p>
+  
+      <p>
+      <label>Descricao
+        <textarea [(ngModel)]="evento.descricao" placeholder="descricao">
+        </textarea>
+      </label>
+  </p>
+  </div>
+  <h3>{{evento.titulo}}</h3>
+  <h3>{{evento.descricao}}</h3>
+  
+  
+  <app-evento-detail [evento]="selectedEvento"></app-evento-detail>
+  
+  <div class="row">
+      <div class="col-xs-12">
+        <div class="box">
+          <div class="box-header">
+            <h2>Eventos</h2>
+  
+            <div class="box-tools">
+              <div class="input-group input-group-sm" style="width: 150px;">
+                <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+  
+                <div class="input-group-btn">
+                  <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                </div>
               </div>
             </div>
           </div>
+          <!-- /.box-header -->
+          <div class="box-body table-responsive no-padding">
+            <table class="table table-hover">
+              <tr>
+                <th>Titulo</th>
+                <th>Data do Evento</th>
+                <th>Descricao</th>
+            <!--    <th>imagem</th> -->
+                
+              </tr>
+                              
+                                  <tr *ngFor= "let evento of eventos" [class.selected]="evento === selectedEvento" 
+                                  (click)="onSelect(evento)">
+                                  <td>{{evento.titulo}}</td>
+                                  <td>{{evento.data_evento}}</td>
+                                  <td>{{evento.descricao}}</td>
+                               <!--    <td><img [src]="evento.imagem"></td> -->   
+                              </tr>
+                             
+                          
+            </table>
+          </div>
+          <!-- /.box-body -->
         </div>
-        <!-- /.box-header -->
-        <div class="box-body table-responsive no-padding">
-          <table class="table table-hover">
-            <tr>
-              <th>Titulo</th>
-              <th>Data do Evento</th>
-              <th>Descricao</th>
-              <th>imagem</th>
-              
-            </tr>
-                            
-                                <tr *ngFor= "let evento of eventos">
-                                <td>{{evento.titulo}}</td>
-                                <td>1-7-2017</td>
-                                <td>{{evento.descricao}}</td>
-                                 <td>imagens</td>
-                            </tr>
-                           
-                        
-          </table>
-        </div>
-        <!-- /.box-body -->
+        <!-- /.box -->
       </div>
-      <!-- /.box -->
     </div>
-  </div>
+  

@@ -1,0 +1,25 @@
+<div *ngIf="evento">
+    
+     <p>
+         <label>Imagem
+       <!--     <img [src]="evento.imagem"> -->
+             <input [(ngModel)]="evento.imagem" type="file">
+         </label>
+     </p> 
+     <label>Titulo
+         <input [(ngModel)]="evento.titulo" placeholder="titulo">
+     </label>
+     <p>
+         <label>Data do evento
+             <input [(ngModel)]="evento.data_evento" type="date" placeholder="data do evento">
+         </label>
+     </p>
+ 
+     <p>
+     <label>Descricao
+       <textarea [(ngModel)]="evento.descricao" placeholder="descricao">
+       </textarea>
+     </label>
+ </p>
+ 
+ </div>

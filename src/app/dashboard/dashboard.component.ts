@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Evento } from '../evento';
+import { EventoService } from '../evento.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -6,36 +8,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
-  user:any = {};
-  visible:boolean = false;
-
-  closelogin(){
-      alert("close")
-  }
-
-  // Create account with email
-  createAccount(user){
-      console.log(user);
-      alert("Email: "+user.name + "\nPassword: " + user.password1)
-  }
-
-  back(){
-      this.visible = !this.visible;
-      
-
-  }
-  next(){
-      this.visible = !this.visible;
-  }
-
-  finish(){
-      alert("Calm down,Why are you running!!")
-  }
-
+    eventos:Evento[];
+    evento:any = {"titulo":""}
+    selectedEvento:Evento;
+      constructor(private eventoService: EventoService) {
+    
+       }
+    
+      ngOnInit() {
+      this.getEventos();
+      }
+    
+      onSelect(evento:Evento): void{
+        this.selectedEvento = evento;
+    
+      }
+    
+      getEventos(): void {
+        this.eventoService.getEventos().subscribe(eventos => this.eventos = eventos);
+      }
 }

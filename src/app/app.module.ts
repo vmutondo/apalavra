@@ -10,6 +10,8 @@ import { FormsModule } from '@angular/forms';
 import { EventoDetailComponent } from './evento-detail/evento-detail.component'; // <-- NgModel lives here
 import {EventoService} from './evento.service';
 import { AppRoutingModule } from './/app-routing.module';
+import { GrupoComponent } from './grupo/grupo.component';
+import { GrupoDetailComponent } from './grupo-detail/grupo-detail.component';
 
 
 @NgModule({
@@ -18,7 +20,9 @@ import { AppRoutingModule } from './/app-routing.module';
     LoginComponent,
     DashboardComponent,
     EventoComponent,
-    EventoDetailComponent
+    EventoDetailComponent,
+    GrupoComponent,
+    GrupoDetailComponent
     
   ],
   imports: [

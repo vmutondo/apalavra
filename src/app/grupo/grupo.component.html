@@ -1,28 +1,27 @@
-<div class="grupo-input">
-  
-      <label>Nome do Lider
-          <input [(ngModel)]="grupo.nomeLider" placeholder="nome">
-      </label>
+<div class="grupo-container">
+  <form>
+          <input [(ngModel)]="grupo.nomeLider" type="text" placeholder="Nome do Lider">
       <p>
-        <label>Contacto 
-            <input [(ngModel)]="grupo.contacto" type="number" placeholder="">
-        </label>
+        
+            <input [(ngModel)]="grupo.contacto" type="number" placeholder="Contacto ">
+     
     </p>
       <p>
-          <label>Data do encontro <!-- nao eh obrigatorio este camppo -->
-              <input [(ngModel)]="grupo.data" placeholder="ex.: quinta-feira pelas 15h">
-          </label>
-      </p>
+         
+              <input [(ngModel)]="grupo.data" type="text" placeholder="Data do encontro. ex.: quinta-feira pelas 15h">
   
       <p>
-      <label>Descricao
-        <textarea [(ngModel)]="grupo.descricao" placeholder="descricao">
+        <label>Descricao
+        <textarea [(ngModel)]="grupo.descricao" type="text" placeholder="Descricao">
         </textarea>
       </label>
-      <label>imagem
+<br><br>
+      <label>adicionar imagem
+        <br>
         <input [(ngModel)]="grupo.imagem" type="file">
       </label>
   </p>
+</form>
   </div>
 
   
@@ -53,6 +52,7 @@
                 <th>Contacto</th>
                 <th>Data do encontro</th>
                 <th>Descricao</th>
+                <th>Universidade</th>
             <!--    <th>imagem</th> -->
                 
               </tr>
@@ -63,6 +63,7 @@
                                   <td>{{grupo.contacto}}</td>
                                   <td>{{grupo.data}}</td>
                                   <td>{{grupo.descricao}}</td>
+                                  <td>{{grupo.nomeUniversidade}}</td>
                                <!--    <td><img [src]="grupo.imagem"></td> -->   
                               </tr>
                              

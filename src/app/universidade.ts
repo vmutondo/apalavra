@@ -1,4 +1,4 @@
 export class Universidade {
-    id:number;
+    //id:number;
     nome:String;
 }

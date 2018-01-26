@@ -1,16 +1,30 @@
-<div  class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin:auto;">
-    	  <div class="modal-dialog">
-				<div class="loginmodal-container">
-					<h1>Login to Admin Page</h1><br>
-				  <form>
-					<input type="text" name="user" placeholder="Username">
-					<input type="password" name="pass" placeholder="Password">
-					<input type="submit" name="login" class="login loginmodal-submit" value="Login">
-				  </form>
-					
-				  <div class="login-help">
-					<a href="#">Forgot Password?</a>
-				  </div>
+<div class="login-component">
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 centralize">
+				<div>
+					<p class="text-center">
+						<img src="./assets/apalavra/A-palavra-logo---white-126x128.png" class="img-logo" alt="">
+					</p>
+					<h1 class="text-center">
+						<b>A PALAVRA</b>
+					</h1>
+
+					<div id="login-form">
+						<div class="form-group">
+							<label for="email">Email:</label>
+							<input type="txt" class="form-control" id="email">
+						</div>
+						<div class="form-group">
+							<label for="senha">Senha:</label>
+							<input type="password" class="form-control" id="password">
+						</div>
+						<button class="btn btn-login" routerLink="/inicio">Login</button>
+					</div>
+
 				</div>
 			</div>
-		  </div>
+		</div>
+	</div>
+</div>

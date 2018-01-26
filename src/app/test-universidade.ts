@@ -1,5 +1,5 @@
 import {Universidade} from './universidade';
 
 export const UNIVERSIDADES: Universidade[] = [
-    {nome:"uem"},{nome:"isutc"},{nome:"isctem"},{nome:"up"}
+    {id:"",nome:"uem"},{id:"", nome:"isutc"},{id:"", nome:"isctem"},{id:"", nome:"up"}
 ]

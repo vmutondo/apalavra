@@ -1,6 +1,6 @@
-<div class="evento-input">
-  
-      <label>Titulo
+<!-- <div class="evento-input"> -->
+
+<!-- <label>Titulo
           <input [(ngModel)]="evento.titulo" placeholder="titulo">
       </label>
       <p>
@@ -39,30 +39,188 @@
             </div>
           </div>
           <!-- /.box-header -->
-          <div class="box-body table-responsive no-padding">
+<!-- <div class="box-body table-responsive no-padding">
             <table class="table table-hover">
               <tr>
                 <th>Titulo</th>
                 <th>Data do Evento</th>
-                <th>Descricao</th>
-            <!--    <th>imagem</th> -->
-                
-              </tr>
+                <th>Descricao</th> -->
+<!--    <th>imagem</th> -->
+
+<!-- </tr>
                               
                                   <tr *ngFor= "let evento of eventos" [class.selected]="evento === selectedEvento" 
                                   (click)="onSelect(evento)">
                                   <td>{{evento.titulo}}</td>
                                   <td>{{evento.data_evento}}</td>
-                                  <td>{{evento.descricao}}</td>
-                               <!--    <td><img [src]="evento.imagem"></td> -->   
-                              </tr>
+                                  <td>{{evento.descricao}}</td> -->
+<!--    <td><img [src]="evento.imagem"></td> -->
+<!-- </tr>
                              
                           
             </table>
-          </div>
-          <!-- /.box-body -->
-        </div>
-        <!-- /.box -->
+          </div> -->
+<!-- /.box-body -->
+<!-- </div> -->
+<!-- /.box
+      </div>
+    </div> -->
+
+
+
+<div class="dashboard-container">
+  <div class="jumbotron jumbotron-fluid dark-background">
+    
+    <div class="container">
+        
+      <h1>Eventos</h1>
+      <!-- <p>Aqui podes fazer a gestao dos eventos, grupos e visualizacao de estatisticas.</p> -->
+    </div>
+  </div>
+
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+
+        <h3>Lista de eventos</h3>
+        <br>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Imagem</th>
+              <th>Titulo</th>
+              <th>Descricao</th>
+              <th>Data da realizacao</th>
+              <th>Opcoes</th>
+            </tr>
+          </thead>
+          <tbody>
+
+
+            <!-- copy -->
+            <tr class="item-event" *ngFor= "let evento of eventos">
+              <td>
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzIGCGi1ahFM9tIRKLWe2Sv1AmIQAoPcE5k6UcoWjxxNv-BQc6" class="table-img"
+                  alt="">
+              </td>
+              <td>{{evento.titulo}}</td>
+              <td>{{evento.descricao}}</td> 
+              <td>{{evento.data_evento}}</td>
+              <td>
+                <div class="dropdown">
+                  <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-cog" aria-hidden="true"></i>
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" data-toggle="modal" (click)="deletar(evento)" data-target="#deletarModal">Deletar</a>
+                    <a class="dropdown-item" data-toggle="modal" (click)="editar(evento)"  data-target="#myModal">Editar</a>
+
+                  </div>
+                </div>
+              </td>
+
+
+              <!-- end copy -->
+
+          </tbody>
+        </table>
+      </div>
+
+      <div class="col-md-3 offset-1 ">
+        <h3>Estatistica</h3>
+        <br>
+        <p>
+          <b>Total numero de eventos: </b>121</p>
+        <p>
+          <b>Eventos por acontecer: </b>20</p>
+        <p>
+          <b>Eventos realizados: </b>42</p>
+
+
       </div>
     </div>
-  
+
+
+  </div>
+
+  <button class="add-btn" data-toggle="modal" data-target="#myModal">Novo Evento +
+  </button>
+
+
+  <!--..............................................................................' 
+
+                                   MODAL SECTION
+    
+   ...............................................................................-->
+
+  <!-- Adding new Event Model -->
+  <div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Adicionar novo evento</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+
+          <form action="post">
+
+            <div class="form-group">
+              <label for="titulo">Titulo do Evento:</label>
+              <input type="txt" [(ngModel)]="eventonovo.titulo" class="form-control" name="titulo" id="titulo">
+            </div>
+
+            <div class="form-group">
+              <label for="data">Data da Realizacao Evento</label>
+              <input type="date" [(ngModel)]="eventonovo.data" class="form-control" name="data" id="date">
+            </div>
+
+            <div class="form-group">
+              <label for="Dd">Descricao do Evento</label>
+              <textarea name="descricao" [(ngModel)]="eventonovo.descricao" class="form-control" name="descricao" id="" rows="5"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="imagem">Anexar a imagem</label>
+              <input type="file" [(ngModel)]="eventonovo.imagem" class="form-control" name="imagem" id="file">
+
+            </div>
+
+            <button type="button" class="btn btn-primary" (click)="adicionar(eventonovo)" data-dismiss="modal">Salvar</button>
+            <button type="button" class="btn btn-danger" (click)="clean()" data-dismiss="modal">Cancelar</button>
+
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Remove Event Model -->
+  <div class="modal fade" id="deletarModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+
+        <!-- Modal body -->
+        <div class="modal-body">
+
+          <p>Tens a certeza que pretendes deletar o evento.
+          </p>
+
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Sim</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Nao</button>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>

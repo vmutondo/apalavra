@@ -23,8 +23,8 @@ import {GrupoService } from './grupo.service';
     EventoComponent,
     EventoDetailComponent,
     GrupoComponent,
-    GrupoDetailComponent
-    
+    GrupoDetailComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +32,7 @@ import {GrupoService } from './grupo.service';
     AppRoutingModule
   ],
   providers: [
-    EventoService,GrupoService
+    EventoService, GrupoService
   ],
   bootstrap: [AppComponent]
 })

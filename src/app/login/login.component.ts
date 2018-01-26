@@ -8,18 +8,46 @@ import { DashboardComponent } from '../dashboard/dashboard.component';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
-  title = 'login';
-  constructor() { 
-  
-  }
+user:any = {}
+  constructor() { }
 
   ngOnInit() {
-
   }
 
- 
+// =================================================
+//  Login 
+// =================================================
+  login(user:any){
+    alert(user.name )
+  }
+  // =================================================
 
+
+// =================================================
+//  CreateAccount
+// =================================================
+  createAccount(){
+    alert("create account" )
+  }
+  // =================================================
+
+
+
+// =================================================
+//  Login with social network
+// =================================================
+  loginSocial(item){
+    alert(item )
+  }
+  // =================================================
+
+
+
+// =================================================
+//  CreateAccount
+// =================================================
+  closeComponent(){
+    alert("closing" )
+  }
+  // =================================================
 }
-
-

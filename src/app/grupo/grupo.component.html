@@ -1,31 +1,32 @@
-<div class="grupo-container">
-  <form>
-          <input [(ngModel)]="grupo.nomeLider" type="text" placeholder="Nome do Lider">
+<!-- <div class="grupo-input">
+  
+      <label>Nome do Lider
+          <input [(ngModel)]="grupo.nomeLider" placeholder="nome">
+      </label>
       <p>
-        
-            <input [(ngModel)]="grupo.contacto" type="number" placeholder="Contacto ">
-     
+        <label>Contacto 
+            <input [(ngModel)]="grupo.contacto" type="number" placeholder="">
+        </label>
     </p>
       <p>
-         
-              <input [(ngModel)]="grupo.data" type="text" placeholder="Data do encontro. ex.: quinta-feira pelas 15h">
+          <label>Data do encontro nao eh obrigatorio este camppo -->
+              <!-- <input [(ngModel)]="grupo.data" placeholder="ex.: quinta-feira pelas 15h">
+          </label>
+      </p>
   
       <p>
-        <label>Descricao
-        <textarea [(ngModel)]="grupo.descricao" type="text" placeholder="Descricao">
+      <label>Descricao
+        <textarea [(ngModel)]="grupo.descricao" placeholder="descricao">
         </textarea>
       </label>
-<br><br>
-      <label>adicionar imagem
-        <br>
+      <label>imagem
         <input [(ngModel)]="grupo.imagem" type="file">
       </label>
   </p>
-</form>
-  </div>
+  </div> -->
 
   
-  
+<!--   
    <app-grupo-detail [grupo]="selectedGrupo"></app-grupo-detail> 
   
   <div class="row">
@@ -43,36 +44,258 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
           <!-- /.box-header -->
-          <div class="box-body table-responsive no-padding">
+          <!-- <div class="box-body table-responsive no-padding">
             <table class="table table-hover">
               <tr>
                 <th>Nome do Lider</th>
                 <th>Contacto</th>
                 <th>Data do encontro</th>
-                <th>Descricao</th>
-                <th>Universidade</th>
+                <th>Descricao</th> -->
             <!--    <th>imagem</th> -->
                 
-              </tr>
+              <!-- </tr>
                               
                                   <tr *ngFor= "let grupo of grupos" [class.selected]="grupo === selectedGrupo" 
                                   (click)="onSelect(grupo)">
                                   <td>{{grupo.nomeLider}}</td>
                                   <td>{{grupo.contacto}}</td>
                                   <td>{{grupo.data}}</td>
-                                  <td>{{grupo.descricao}}</td>
-                                  <td>{{grupo.nomeUniversidade}}</td>
+                                  <td>{{grupo.descricao}}</td> -->
                                <!--    <td><img [src]="grupo.imagem"></td> -->   
-                              </tr>
+                              <!-- </tr>
+                             
+                          
+            </table> -->
+          <!-- </div> -->
+          <!-- /.box-body -->
+        <!-- </div> -->
+        <!-- /.box -->
+      <!-- </div>
+    </div>
+   -->
+
+   <!-- <div class="evento-input"> -->
+
+<!-- <label>Titulo
+          <input [(ngModel)]="evento.titulo" placeholder="titulo">
+      </label>
+      <p>
+          <label>Data do evento
+              <input type="date" placeholder="data do evento">
+          </label>
+      </p>
+  
+      <p>
+      <label>Descricao
+        <textarea [(ngModel)]="evento.descricao" placeholder="descricao">
+        </textarea>
+      </label>
+  </p>
+  </div>
+  <h3>{{evento.titulo}}</h3>
+  <h3>{{evento.descricao}}</h3>
+  
+  
+  <app-evento-detail [evento]="selectedEvento"></app-evento-detail>
+  
+  <div class="row">
+      <div class="col-xs-12">
+        <div class="box">
+          <div class="box-header">
+            <h2>Eventos</h2>
+  
+            <div class="box-tools">
+              <div class="input-group input-group-sm" style="width: 150px;">
+                <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+  
+                <div class="input-group-btn">
+                  <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /.box-header -->
+<!-- <div class="box-body table-responsive no-padding">
+            <table class="table table-hover">
+              <tr>
+                <th>Titulo</th>
+                <th>Data do Evento</th>
+                <th>Descricao</th> -->
+<!--    <th>imagem</th> -->
+
+<!-- </tr>
+                              
+                                  <tr *ngFor= "let evento of eventos" [class.selected]="evento === selectedEvento" 
+                                  (click)="onSelect(evento)">
+                                  <td>{{evento.titulo}}</td>
+                                  <td>{{evento.data_evento}}</td>
+                                  <td>{{evento.descricao}}</td> -->
+<!--    <td><img [src]="evento.imagem"></td> -->
+<!-- </tr>
                              
                           
             </table>
-          </div>
-          <!-- /.box-body -->
-        </div>
-        <!-- /.box -->
+          </div> -->
+<!-- /.box-body -->
+<!-- </div> -->
+<!-- /.box
       </div>
+    </div> -->
+
+
+
+<div class="dashboard-container">
+    
+      <div class="jumbotron jumbotron-fluid dark-background">
+        <div class="container">
+          <h1>Grupos</h1>
+          <!-- <p>Aqui podes fazer a gestao dos eventos, grupos e visualizacao de estatisticas.</p> -->
+        </div>
+      </div>
+    
+    
+    
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8">
+    
+            <h3>Lista de Grupos</h3>
+            <br>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Lider</th>
+                  <th>Contacto</th>
+                  <th>Data do evento</th>
+                  <th>Universidade</th>
+                  <th>Opcoes</th>
+                </tr>
+              </thead>
+              <tbody>
+    
+    
+                <!-- copy -->
+                <tr class="item-event">
+                 
+                  <td>Virgilio Mutondo</td>
+                  <td>+(258) 84 8822 013</td>
+                  <td>Terca-Feira, 21 de Setembro de 2018</td>
+                  <td>Univercida</td>
+                  <td>
+                    <div class="dropdown">
+                      <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-cog" aria-hidden="true"></i>
+                      </button>
+                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" data-toggle="modal" data-target="#deletarModal">Deletar</a>
+                        <a class="dropdown-item" data-toggle="modal" data-target="#myModal">Editar</a>
+    
+                      </div>
+                    </div>
+                  </td>
+    
+    
+                  <!-- end copy -->
+    
+              </tbody>
+            </table>
+          </div>
+    
+          <div class="col-md-3 offset-1 ">
+            <h3>Estatistica</h3>
+            <br>
+            <p>
+              <b>Total numero de grupo: </b>121</p>
+            <p>
+    
+          </div>
+        </div>
+    
+    
+      </div>
+    
+      <button class="add-btn" data-toggle="modal" data-target="#myModal">Novo Grupo +
+      </button>
+    
+    
+      <!--..............................................................................' 
+    
+                                       MODAL SECTION
+        
+       ...............................................................................-->
+    
+      <!-- Adding new Event Model -->
+      <div class="modal fade" id="myModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+    
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title">Adicionar novo grupo</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+    
+            <!-- Modal body -->
+            <div class="modal-body">
+    
+              <form action="post">
+    
+                <div class="form-group">
+                  <label for="titulo">Nome do Lider:</label>
+                  <input type="txt" class="form-control" id="titulo">
+                </div>
+    
+                <div class="form-group">
+                  <label for="data">Contacto</label>
+                  <input type="number" class="form-control" id="number">
+                </div>
+
+                <div class="form-group">
+                    <label for="data">Data do evento</label>
+                    <input type="String" class="form-control" id="data">
+                  </div>
+    
+                <div class="form-group">
+                  <label for="Dd">Nome da Universidade</label>
+                  <select name="descricao" class="form-control" id="" rows="5">
+                    <option value="">UEM-CAMPUS</option>
+                    <option value="">UEM-FRNG</option>
+                  </select>
+                </div>
+    
+            
+    
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Salvar</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+    
+              </form>
+            </div>
+    
+          </div>
+        </div>
+      </div>
+    
+      <!-- Remove Event Model -->
+      <div class="modal fade" id="deletarModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+    
+    
+            <!-- Modal body -->
+            <div class="modal-body">
+    
+              <p>Tens a certeza que pretendes deletar o evento.
+              </p>
+    
+              <button type="button" class="btn btn-primary" data-dismiss="modal">Sim</button>
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Nao</button>
+    
+            </div>
+    
+          </div>
+        </div>
+      </div>
+    
     </div>
-  

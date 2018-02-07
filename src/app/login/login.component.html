@@ -1,3 +1,4 @@
+
 <div class="login-component">
 
 	<div class="container">
@@ -10,19 +11,20 @@
 					<h1 class="text-center">
 						<b>A PALAVRA</b>
 					</h1>
-
+					<form  (ngSubmit)="signup()">
 					<div id="login-form">
 						<div class="form-group">
 							<label for="email">Email:</label>
-							<input type="txt" class="form-control" id="email">
+							<input type="email" class="form-control" id="email">
 						</div>
 						<div class="form-group">
 							<label for="senha">Senha:</label>
 							<input type="password" class="form-control" id="password">
 						</div>
-						<button class="btn btn-login" routerLink="/inicio">Login</button>
+					<!--	<button  class="btn btn-login" type="submit">Submit</button> -->
+						<button class="btn btn-login" routerLink="/inicio">Login</button> 
 					</div>
-
+				</form>
 				</div>
 			</div>
 		</div>

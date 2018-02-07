@@ -8,23 +8,14 @@ import { EventoService } from '../evento.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  ngOnInit(): void {
+    
+  }
     eventos:Evento[];
     evento:any = {"titulo":""}
     selectedEvento:Evento;
       constructor(private eventoService: EventoService) {
     
-       }
-    
-      ngOnInit() {
-      this.getEventos();
       }
-    
-      onSelect(evento:Evento): void{
-        this.selectedEvento = evento;
-    
-      }
-    
-      getEventos(): void {
-        this.eventoService.getEventos().subscribe(eventos => this.eventos = eventos);
-      }
+      
 }

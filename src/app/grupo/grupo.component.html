@@ -150,6 +150,7 @@
     
       <div class="jumbotron jumbotron-fluid dark-background">
         <div class="container">
+            <button type="button" class="btn btn-dark btn-lg" routerLink="/inicio">Pagina Inicial</button>
           <h1>Grupos</h1>
           <!-- <p>Aqui podes fazer a gestao dos eventos, grupos e visualizacao de estatisticas.</p> -->
         </div>
@@ -177,20 +178,20 @@
     
     
                 <!-- copy -->
-                <tr class="item-event">
+                <tr class="item-event" *ngFor="let grupo of grupos | async">
                  
-                  <td>Virgilio Mutondo</td>
-                  <td>+(258) 84 8822 013</td>
-                  <td>Terca-Feira, 21 de Setembro de 2018</td>
-                  <td>Univercida</td>
+                  <td>{{grupo.nomeLider}}</td>
+                  <td>{{grupo.contacto}}</td>
+                  <td>{{grupo.data}}</td>
+                  <td>{{grupo.nomeUniversidade}}</td>
                   <td>
                     <div class="dropdown">
                       <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-cog" aria-hidden="true"></i>
                       </button>
                       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" data-toggle="modal" data-target="#deletarModal">Deletar</a>
-                        <a class="dropdown-item" data-toggle="modal" data-target="#myModal">Editar</a>
+                        <a class="dropdown-item" data-toggle="modal" (click)="deletar(grupo)" data-target="#deletarModal">Deletar</a>
+                        <a class="dropdown-item" data-toggle="modal" (click)="editar(grupo)" data-target="#myModalEdit">Editar</a>
     
                       </div>
                     </div>
@@ -218,7 +219,9 @@
     
       <button class="add-btn" data-toggle="modal" data-target="#myModal">Novo Grupo +
       </button>
-    
+      <br>
+      <button class="add-btn01" data-toggle="modal" data-target="#myModalUniversidade">Nova Universidade +
+      </button>
     
       <!--..............................................................................' 
     
@@ -234,6 +237,61 @@
             <!-- Modal Header -->
             <div class="modal-header">
               <h4 class="modal-title">Adicionar novo grupo</h4>
+              <button type="button"  class="close" data-dismiss="modal">&times;</button>
+            </div>
+    
+            <!-- Modal body -->
+            <div class="modal-body">
+    
+              <form action="post">
+    
+                <div class="form-group">
+                  <label for="titulo">Nome do Lider:</label>
+                  <input type="txt" class="form-control" [(ngModel)]="gruponovo.nomeLider" name="nomeLider" id="titulo">
+                </div>
+    
+                <div class="form-group">
+                  <label for="data">Contacto</label>
+                  <input type="number" [(ngModel)]="gruponovo.contacto" class="form-control" name="contacto" id="number">
+                </div>
+
+                <div class="form-group">
+                    <label for="data">Data do encontro</label>
+                    <input type="String" [(ngModel)]="gruponovo.data" class="form-control" name="data" id="data">
+                  </div>
+    
+                <div class="form-group">
+                  <label for="nomeUniversidade">Nome da Universidade</label>
+                  <select [(ngModel)]="gruponovo.nomeUniversidade" class="item-event"  name="nomeUniversidade" class="form-control" id="nomeUniversidade" rows="5">
+                    <option *ngFor="let universidade of universidades | async" [ngValue]="universidade">{{universidade.nome}}</option>
+                    
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="imagem">Anexar a imagem</label>
+                  <input type="file" [(ngModel)]="gruponovo.imagem" class="form-control" name="imagem" id="file">
+    
+                </div>
+    
+                <button type="button" class="btn btn-primary" (click)="adicionar(gruponovo)"  data-dismiss="modal">Salvar</button>
+                <button type="button" class="btn btn-danger" (click)="clean()" data-dismiss="modal">Cancelar</button>
+    
+              </form>
+            </div>
+    
+          </div>
+        </div>
+      </div>
+
+      <!-- Edit Grupo Model -->
+      <div class="modal fade" id="myModalEdit">
+        <div class="modal-dialog">
+          <div class="modal-content">
+    
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title">Editar Grupo</h4>
               <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
     
@@ -244,31 +302,71 @@
     
                 <div class="form-group">
                   <label for="titulo">Nome do Lider:</label>
-                  <input type="txt" class="form-control" id="titulo">
+                  <input type="txt" [(ngModel)]="grupo.nomeLider" class="form-control" name="nome" id="titulo">
                 </div>
     
                 <div class="form-group">
-                  <label for="data">Contacto</label>
-                  <input type="number" class="form-control" id="number">
+                  <label for="data">Contacto do Lider</label>
+                  <input type="date" [(ngModel)]="grupo.contacto" class="form-control" name="contacto" id="contacto">
+                </div>
+    
+                <div class="form-group">
+                  <label for="Dd">Data do Encontro</label>
+                  <input type="txt" [(ngModel)]="grupo.data" class="form-control" name="data" id="date">
                 </div>
 
                 <div class="form-group">
-                    <label for="data">Data do evento</label>
-                    <input type="String" class="form-control" id="data">
-                  </div>
-    
-                <div class="form-group">
-                  <label for="Dd">Nome da Universidade</label>
-                  <select name="descricao" class="form-control" id="" rows="5">
-                    <option value="">UEM-CAMPUS</option>
-                    <option value="">UEM-FRNG</option>
+                  <label for="nomeUniversidade">Nome da Universidade</label>
+                  <select [(ngModel)]="grupo.nomeUniversidade" class="item-event"  name="nomeUniversidade" class="form-control" id="nomeUniversidade" rows="5">
+                    <option *ngFor="let universidade of universidades | async" [ngValue]="universidade">{{universidade.nome}}</option>
+                    
                   </select>
                 </div>
+
+                <div class="form-group">
+                  <label for="imagem">Anexar a imagem</label>
+                  <input type="file" [(ngModel)]="grupo.imagem" class="form-control" name="imagem" id="file">
     
-            
+                </div>
     
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Salvar</button>
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" (click)="update(grupo)"  data-dismiss="modal">Salvar</button>
+                <button type="button" class="btn btn-danger" (click)="clean()" data-dismiss="modal">Cancelar</button>
+    
+              </form>
+            </div>
+    
+          </div>
+        </div>
+      </div>
+      <!-- Adding new Universidade Model -->
+      <div class="modal fade" id="myModalUniversidade">
+        <div class="modal-dialog">
+          <div class="modal-content">
+    
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title">Adicionar nova Universidade</h4>
+              <button type="button"  class="close" data-dismiss="modal">&times;</button>
+            </div>
+    
+            <!-- Modal body -->
+            <div class="modal-body">
+    
+              <form action="post">
+    
+                <div class="form-group">
+                  <label for="titulo">Nome da Universidade:</label>
+                  <input type="txt" class="form-control" [(ngModel)]="universidadenovo.nome" name="nome" id="titulo">
+                </div>
+
+                <div class="form-group">
+                  <label for="imagem">Anexar a imagem</label>
+                  <input type="file" [(ngModel)]="gruponovo.imagem" class="form-control" name="imagem" id="file">
+    
+                </div>
+    
+                <button type="button" class="btn btn-primary" (click)="adicionarUniversidade(universidadenovo)"  data-dismiss="modal">Salvar</button>
+                <button type="button" class="btn btn-danger" (click)="clean()" data-dismiss="modal">Cancelar</button>
     
               </form>
             </div>
@@ -286,7 +384,7 @@
             <!-- Modal body -->
             <div class="modal-body">
     
-              <p>Tens a certeza que pretendes deletar o evento.
+              <p>Tens a certeza que pretendes deletar o grupo.
               </p>
     
               <button type="button" class="btn btn-primary" data-dismiss="modal">Sim</button>

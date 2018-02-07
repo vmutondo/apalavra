@@ -13,7 +13,12 @@ import { AppRoutingModule } from './/app-routing.module';
 import { GrupoComponent } from './grupo/grupo.component';
 import { GrupoDetailComponent } from './grupo-detail/grupo-detail.component';
 import {GrupoService } from './grupo.service';
-
+import { AngularFireModule } from 'angularfire2';
+import { environment } from '../environments/environment';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireStorageModule } from 'angularfire2/storage';
+import {AuthService} from './auth.service';
+import { NotifyService } from './notify.service';
 
 @NgModule({
   declarations: [
@@ -29,10 +34,13 @@ import {GrupoService } from './grupo.service';
   imports: [
     BrowserModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule.enablePersistence(), 
+    AngularFireStorageModule
   ],
   providers: [
-    EventoService, GrupoService
+    AuthService,EventoService, GrupoService,NotifyService
   ],
   bootstrap: [AppComponent]
 })

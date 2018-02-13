@@ -1,14 +1,16 @@
 export class Grupo{
     id?:string;
-nomeLider:string;
+nome_lider:string;
 contacto:number;
-data:string;//ex.:quinta-feira pelas 15h
+encontro:string;//ex.:quinta-feira pelas 15h
 //descricao:string;
-nomeUniverdade:string;
+nome_universidade:string;
 imagem:string;
+file:File;
 
 
-constructor(){
+constructor(file:File){
+    this.file = file;
 
 }
 

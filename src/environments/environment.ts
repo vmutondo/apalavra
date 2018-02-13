@@ -12,6 +12,14 @@ export const environment = {
     projectId: "apalavra-c7167",
     storageBucket: "apalavra-c7167.appspot.com",
     messagingSenderId: "1080680497709"
+
+ /* firebase : {
+    apiKey: "AIzaSyDCqLXTxUbIhWD2r0bWyysoFUjdR7zkEIU",
+  authDomain: "apalavra-2db56.firebaseapp.com",
+  databaseURL: "https://apalavra-2db56.firebaseio.com",
+  projectId: "apalavra-2db56",
+  storageBucket: "apalavra-2db56.appspot.com",
+  messagingSenderId: "893159193469"*/
   }
 };
  

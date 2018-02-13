@@ -101,12 +101,12 @@
             <!-- copy -->
             <tr class="item-event" *ngFor= "let evento of eventos | async">
               <td>
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzIGCGi1ahFM9tIRKLWe2Sv1AmIQAoPcE5k6UcoWjxxNv-BQc6" class="table-img"
+                <img src="{{evento.imagem}}" class="table-img"
                   alt="">
               </td>
               <td>{{evento.titulo}}</td>
               <td>{{evento.descricao}}</td> 
-              <td>{{evento.data_evento}}</td>
+              <td>{{evento.data_evento | date:'MMM d, y, h:mm:ss a'}}</td>
               <td>
                 <div class="dropdown">
                   <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -185,8 +185,8 @@
 
             <div class="form-group">
               <label for="imagem">Anexar a imagem</label>
-              <input type="file" [(ngModel)]="eventonovo.imagem" class="form-control" name="imagem" id="file">
-
+              <input type="file" [(ngModel)]="eventonovo.imagem" (change)="uploadImage($event)" class="form-control" name="imagem" id="file">
+              <!--(change)="uploadImage($event)"-->
             </div>
 
             <button type="button" class="btn btn-primary" (click)="adicionar(eventonovo)"  data-dismiss="modal">Salvar</button>

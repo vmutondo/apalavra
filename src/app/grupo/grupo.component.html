@@ -1,149 +1,3 @@
-<!-- <div class="grupo-input">
-  
-      <label>Nome do Lider
-          <input [(ngModel)]="grupo.nomeLider" placeholder="nome">
-      </label>
-      <p>
-        <label>Contacto 
-            <input [(ngModel)]="grupo.contacto" type="number" placeholder="">
-        </label>
-    </p>
-      <p>
-          <label>Data do encontro nao eh obrigatorio este camppo -->
-              <!-- <input [(ngModel)]="grupo.data" placeholder="ex.: quinta-feira pelas 15h">
-          </label>
-      </p>
-  
-      <p>
-      <label>Descricao
-        <textarea [(ngModel)]="grupo.descricao" placeholder="descricao">
-        </textarea>
-      </label>
-      <label>imagem
-        <input [(ngModel)]="grupo.imagem" type="file">
-      </label>
-  </p>
-  </div> -->
-
-  
-<!--   
-   <app-grupo-detail [grupo]="selectedGrupo"></app-grupo-detail> 
-  
-  <div class="row">
-      <div class="col-xs-12">
-        <div class="box">
-          <div class="box-header">
-            <h2>grupos</h2>
-  
-            <div class="box-tools">
-              <div class="input-group input-group-sm" style="width: 150px;">
-                <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
-  
-                <div class="input-group-btn">
-                  <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                </div>
-              </div>
-            </div>
-          </div> -->
-          <!-- /.box-header -->
-          <!-- <div class="box-body table-responsive no-padding">
-            <table class="table table-hover">
-              <tr>
-                <th>Nome do Lider</th>
-                <th>Contacto</th>
-                <th>Data do encontro</th>
-                <th>Descricao</th> -->
-            <!--    <th>imagem</th> -->
-                
-              <!-- </tr>
-                              
-                                  <tr *ngFor= "let grupo of grupos" [class.selected]="grupo === selectedGrupo" 
-                                  (click)="onSelect(grupo)">
-                                  <td>{{grupo.nomeLider}}</td>
-                                  <td>{{grupo.contacto}}</td>
-                                  <td>{{grupo.data}}</td>
-                                  <td>{{grupo.descricao}}</td> -->
-                               <!--    <td><img [src]="grupo.imagem"></td> -->   
-                              <!-- </tr>
-                             
-                          
-            </table> -->
-          <!-- </div> -->
-          <!-- /.box-body -->
-        <!-- </div> -->
-        <!-- /.box -->
-      <!-- </div>
-    </div>
-   -->
-
-   <!-- <div class="evento-input"> -->
-
-<!-- <label>Titulo
-          <input [(ngModel)]="evento.titulo" placeholder="titulo">
-      </label>
-      <p>
-          <label>Data do evento
-              <input type="date" placeholder="data do evento">
-          </label>
-      </p>
-  
-      <p>
-      <label>Descricao
-        <textarea [(ngModel)]="evento.descricao" placeholder="descricao">
-        </textarea>
-      </label>
-  </p>
-  </div>
-  <h3>{{evento.titulo}}</h3>
-  <h3>{{evento.descricao}}</h3>
-  
-  
-  <app-evento-detail [evento]="selectedEvento"></app-evento-detail>
-  
-  <div class="row">
-      <div class="col-xs-12">
-        <div class="box">
-          <div class="box-header">
-            <h2>Eventos</h2>
-  
-            <div class="box-tools">
-              <div class="input-group input-group-sm" style="width: 150px;">
-                <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
-  
-                <div class="input-group-btn">
-                  <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- /.box-header -->
-<!-- <div class="box-body table-responsive no-padding">
-            <table class="table table-hover">
-              <tr>
-                <th>Titulo</th>
-                <th>Data do Evento</th>
-                <th>Descricao</th> -->
-<!--    <th>imagem</th> -->
-
-<!-- </tr>
-                              
-                                  <tr *ngFor= "let evento of eventos" [class.selected]="evento === selectedEvento" 
-                                  (click)="onSelect(evento)">
-                                  <td>{{evento.titulo}}</td>
-                                  <td>{{evento.data_evento}}</td>
-                                  <td>{{evento.descricao}}</td> -->
-<!--    <td><img [src]="evento.imagem"></td> -->
-<!-- </tr>
-                             
-                          
-            </table>
-          </div> -->
-<!-- /.box-body -->
-<!-- </div> -->
-<!-- /.box
-      </div>
-    </div> -->
-
 
 
 <div class="dashboard-container">
@@ -167,6 +21,7 @@
             <table class="table table-striped">
               <thead>
                 <tr>
+                  <th>Imagem</th>
                   <th>Lider</th>
                   <th>Contacto</th>
                   <th>Data do evento</th>
@@ -179,11 +34,13 @@
     
                 <!-- copy -->
                 <tr class="item-event" *ngFor="let grupo of grupos | async">
-                 
-                  <td>{{grupo.nomeLider}}</td>
+
+                 <td><img src="{{grupo.imagem}}" class="table-img"
+                  alt=""></td>
+                  <td>{{grupo.nome_lider}}</td>
                   <td>{{grupo.contacto}}</td>
-                  <td>{{grupo.data}}</td>
-                  <td>{{grupo.nomeUniversidade}}</td>
+                  <td>{{grupo.encontro}}</td>
+                  <td>{{grupo.nome_universidade.nome}}</td>
                   <td>
                     <div class="dropdown">
                       <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -247,22 +104,22 @@
     
                 <div class="form-group">
                   <label for="titulo">Nome do Lider:</label>
-                  <input type="txt" class="form-control" [(ngModel)]="gruponovo.nomeLider" name="nomeLider" id="titulo">
+                  <input type="txt" class="form-control" [(ngModel)]="gruponovo.nome_lider" name="nome_lider" id="titulo">
                 </div>
     
                 <div class="form-group">
-                  <label for="data">Contacto</label>
+                  <label for="contacto">Contacto</label>
                   <input type="number" [(ngModel)]="gruponovo.contacto" class="form-control" name="contacto" id="number">
                 </div>
 
                 <div class="form-group">
-                    <label for="data">Data do encontro</label>
-                    <input type="String" [(ngModel)]="gruponovo.data" class="form-control" name="data" id="data">
+                    <label for="encontro">Encontro</label>
+                    <input type="String" [(ngModel)]="gruponovo.encontro" class="form-control" name="encontro" id="data">
                   </div>
     
                 <div class="form-group">
-                  <label for="nomeUniversidade">Nome da Universidade</label>
-                  <select [(ngModel)]="gruponovo.nomeUniversidade" class="item-event"  name="nomeUniversidade" class="form-control" id="nomeUniversidade" rows="5">
+                  <label for="nome_universidade">Nome da Universidade</label>
+                  <select [(ngModel)]="gruponovo.nome_universidade" class="item-event"  name="nome_universidade" class="form-control" id="nome_universidade" rows="5">
                     <option *ngFor="let universidade of universidades | async" [ngValue]="universidade">{{universidade.nome}}</option>
                     
                   </select>
@@ -270,7 +127,7 @@
 
                 <div class="form-group">
                   <label for="imagem">Anexar a imagem</label>
-                  <input type="file" [(ngModel)]="gruponovo.imagem" class="form-control" name="imagem" id="file">
+                  <input type="file" [(ngModel)]="gruponovo.imagem" (change)="uploadImage($event)" class="form-control" name="imagem" id="file">
     
                 </div>
     
@@ -302,17 +159,17 @@
     
                 <div class="form-group">
                   <label for="titulo">Nome do Lider:</label>
-                  <input type="txt" [(ngModel)]="grupo.nomeLider" class="form-control" name="nome" id="titulo">
+                  <input type="txt" [(ngModel)]="grupo.nome_lider" class="form-control" name="nome_lider" id="titulo">
                 </div>
     
                 <div class="form-group">
-                  <label for="data">Contacto do Lider</label>
-                  <input type="date" [(ngModel)]="grupo.contacto" class="form-control" name="contacto" id="contacto">
+                  <label for="encontro">Contacto do Lider</label>
+                  <input type="number" [(ngModel)]="grupo.contacto" class="form-control" name="contacto" id="contacto">
                 </div>
     
                 <div class="form-group">
-                  <label for="Dd">Data do Encontro</label>
-                  <input type="txt" [(ngModel)]="grupo.data" class="form-control" name="data" id="date">
+                  <label for="Dd">Dia do Encontro</label>
+                  <input type="txt" [(ngModel)]="grupo.encontro" class="form-control" name="encontro" id="encontro">
                 </div>
 
                 <div class="form-group">
@@ -361,8 +218,8 @@
 
                 <div class="form-group">
                   <label for="imagem">Anexar a imagem</label>
-                  <input type="file" [(ngModel)]="gruponovo.imagem" class="form-control" name="imagem" id="file">
-    
+                  
+                  <input type="file" [(ngModel)]="universidadenovo.imagem" (change)="uploadImage($event)" class="form-control" name="imagem" id="file">
                 </div>
     
                 <button type="button" class="btn btn-primary" (click)="adicionarUniversidade(universidadenovo)"  data-dismiss="modal">Salvar</button>

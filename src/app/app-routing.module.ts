@@ -5,26 +5,29 @@ import {EventoDetailComponent} from './evento-detail/evento-detail.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import {GrupoComponent } from './grupo/grupo.component';
 import {GrupoDetailComponent} from './grupo-detail/grupo-detail.component';
-import { LoginComponent} from './login/login.component'
+import { LoginComponent} from './login/login.component';
+import { AuthGuardService } from './auth-guard.service';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/inicio', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   {path:'inicio', component:DashboardComponent},
   {path: 'eventos', component:EventoComponent},
-  {path: 'eventos-detalhe', component: EventoDetailComponent},
   {path: 'grupos', component:GrupoComponent},
-  {path: 'grupos-detalhe', component:GrupoDetailComponent},
-  {path: 'login', component:LoginComponent},
-  
-  
+  {path: 'login', component:LoginComponent}
 
+  
+  
+//canActivate: [AuthGuardService]
   
 ]
 
 @NgModule({
   imports: [ RouterModule.forRoot(routes) ],
   exports: [
-    RouterModule
+    RouterModule,
+  ],
+  providers:[
+    AuthGuardService
   ]
 })
 export class AppRoutingModule { }

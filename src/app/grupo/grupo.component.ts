@@ -6,6 +6,7 @@ import {Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import * as firebase from 'firebase/app';
 import { FirebaseStorage } from '@firebase/storage-types';
+import { AngularFireStorage } from 'angularfire2/storage';
 
 
 
@@ -15,6 +16,13 @@ import { FirebaseStorage } from '@firebase/storage-types';
   styleUrls: ['./grupo.component.css']
 })
 export class GrupoComponent implements OnInit {
+  currentUploadU: Universidade;
+  currentUpload: Grupo;
+  basePath: 'universidades';
+  basePathGrupo: 'grupos';
+  currentFileUpload: Universidade;
+  selectedFiles: FileList;
+  imagemUpload: any;
 
   gruposCollection:AngularFirestoreCollection<Grupo>;
   gruposDoc:AngularFirestoreDocument<Grupo>;
@@ -26,10 +34,10 @@ export class GrupoComponent implements OnInit {
   grupo:any = {};
   itemToUpdate: Grupo;
   gruponovo: any = {
-    nomeLider: '',
+    nome_lider: '',
     contacto: '',
-    data: '',
-    nomeUniverdade:'',
+    encontro: '',
+    nome_universidade:'',
     imagem: '',
   };
 
@@ -40,7 +48,7 @@ export class GrupoComponent implements OnInit {
     imagem: '',
   };
 
-  constructor(private afs:AngularFirestore ) { }
+  constructor(private afs:AngularFirestore, private up: AngularFireStorage ) { }
 
   ngOnInit() {
     this.gruposCollection = this.afs.collection('grupos');
@@ -81,23 +89,64 @@ export class GrupoComponent implements OnInit {
    
    update(itemToUpdate:Grupo) {
     this.gruposDoc = this.afs.doc(`grupos/${this.itemToUpdate.id}`);
-    this.gruposDoc.update({ nomeLider: itemToUpdate.nomeLider, contacto: itemToUpdate.contacto, data: itemToUpdate.data, imagem: itemToUpdate.imagem, nomeUniverdade:itemToUpdate.nomeUniverdade
+    this.gruposDoc.update({ nome_lider: itemToUpdate.nome_lider, contacto: itemToUpdate.contacto, encontro: itemToUpdate.encontro, imagem: itemToUpdate.imagem, nome_universidade:itemToUpdate.nome_universidade
     }).then(() => {
       console.log('updated');
     })
    }
    
+   uploadImage($event: Event){
+    this.selectedFiles = ($event.target as HTMLInputElement).files;
+
+   }
    
 
   adicionar(grupo): void {
     this.gruponovo = grupo;
  
+    const file = this.selectedFiles;
+    if (file && file.length === 1) {
+      this.currentUpload = new Grupo(file.item(0));
+
+      const storageRef = firebase.storage().ref();
+      const uploadTask = storageRef.child(`${this.basePathGrupo}/${this.currentUpload.file.name}`).put(this.currentUpload.file);
+
+      uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
+        (snapshot) => {
+          // in progress
+          const snap = snapshot as firebase.storage.UploadTaskSnapshot
+        },
+        (error) => {
+          // fail
+          console.log(error)
+        },
+        () => {
+
+          // success
+          if (uploadTask.snapshot.downloadURL) {
+              this.currentUpload.nome_lider = grupo.nome_lider,
+              this.currentUpload.contacto = grupo.contacto, //evento.data_evento
+              this.currentUpload.encontro = grupo.encontro,
+              this.currentUpload.imagem = uploadTask.snapshot.downloadURL;
+              this.currentUpload.nome_universidade = grupo.nome_universidade;
+              this.saveFileDataGrupo(this.currentUpload);
+          }
+
+        });
+    }
+
+  }
+ //============== 
+
   
-  this.afs.collection("grupos").add({
-      nomeLider : grupo.nomeLider,
+
+
+  private saveFileDataGrupo(grupo){
+    this.afs.collection("grupos").add({
+      nome_lider : grupo.nome_lider,
       contacto: grupo.contacto,
-      data: grupo.data,
-      nomeUniverdade:grupo.nomeUniverdade,
+      encontro: grupo.encontro,
+      nome_universidade:grupo.nome_universidade,
       imagem: grupo.imagem
 })
 .then(function(docRef) {
@@ -106,37 +155,74 @@ export class GrupoComponent implements OnInit {
 .catch(function(error) {
     console.error("Error adding document: ", error);
 });
-
   }
  
   clean() {
     this.gruponovo = {
-      nomeLider: '',
+      nome_lider: '',
       contacto: '',
-      data: '',
-      nomeUniverdade:'',
+      encontro: '',
+      nome_universidade:'',
       imagem: '',
     };
   }
 
   //UNIVERSIDADE METHODS
-
-  adicionarUniversidade(universidade): void {
-    this.universidadenovo = universidade;
  
   
-  this.afs.collection("universidades").add({
-      nome : universidade.nome,
-      imagem: universidade.imagem
-})
-.then(function(docRef) {
-    console.log("Document written with ID: ", docRef.id);
-})
-.catch(function(error) {
-    console.error("Error adding document: ", error);
-});
+adicionarUniversidade(universidade): void {
+    this.universidadenovo = universidade;
+    const file = this.selectedFiles;
+    if (file && file.length === 1) {
+      this.currentUploadU = new Universidade(file.item(0));
+
+      const storageRef = firebase.storage().ref();
+      const uploadTask = storageRef.child(`${this.basePath}/${this.currentUploadU.file.name}`).put(this.currentUploadU.file);
+
+      uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
+        (snapshot) => {
+          // in progress
+          const snap = snapshot as firebase.storage.UploadTaskSnapshot
+        },
+        (error) => {
+          // fail
+          console.log(error)
+        },
+        () => {
+
+          // success
+          if (uploadTask.snapshot.downloadURL) {
+              this.currentUploadU.nome = universidade.nome,
+              this.currentUploadU.imagem = uploadTask.snapshot.downloadURL;
+              this.saveFileDataUniversidade(this.currentUploadU);
+          }
+
+        });
+    }
 
   }
+
+  private saveFileDataUniversidade(universidade) {
+     
+  this.afs.collection("universidades").add({
+    nome : universidade.nome,
+    imagem: universidade.imagem
+})
+.then(function(docRef) {
+  console.log("Document written with ID: ", docRef.id);
+})
+.catch(function(error) {
+  console.error("Error adding document: ", error);
+});
+
+
+  }
+
+  
+    
+
+    //=======
+
  
   cleanUniversidade() {
     this.universidade = {

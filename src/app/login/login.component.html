@@ -11,20 +11,24 @@
 					<h1 class="text-center">
 						<b>A PALAVRA</b>
 					</h1>
-					<form  (ngSubmit)="signup()">
+					<form #formData="ngForm" (ngSubmit)="onSubmit(formData)">
 					<div id="login-form">
 						<div class="form-group">
 							<label for="email">Email:</label>
-							<input type="email" class="form-control" id="email">
+							<input type="text" class="form-control" (ngModel)="email" name="email" id="email" required>
 						</div>
 						<div class="form-group">
 							<label for="senha">Senha:</label>
-							<input type="password" class="form-control" id="password">
+							<input type="password" class="form-control"  (ngModel)="password" name="password" id="password" required>
 						</div>
-					<!--	<button  class="btn btn-login" type="submit">Submit</button> -->
-						<button class="btn btn-login" routerLink="/inicio">Login</button> 
+						<button type="submit" [disabled]="!formData.valid" class="btn btn-login" >Login</button>
+					<!--	<button class="btn btn-login" routerLink="/inicio">Login</button> 
+						<button (click)="signInWithGoogle()" class="button btn-social btn-google">
+							<i class="fa fa-google fa-lg"></i> Connect Google
+						  </button>-->
 					</div>
 				</form>
+				
 				</div>
 			</div>
 		</div>

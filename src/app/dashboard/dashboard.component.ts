@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Evento } from '../evento';
-import { EventoService } from '../evento.service';
+import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,8 +15,12 @@ export class DashboardComponent implements OnInit {
     eventos:Evento[];
     evento:any = {"titulo":""}
     selectedEvento:Evento;
-      constructor(private eventoService: EventoService) {
+      constructor(public auth: AuthService) {
     
+      }
+
+      logout() {
+        this.auth.signOut();
       }
       
 }

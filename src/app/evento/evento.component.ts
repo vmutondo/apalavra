@@ -88,6 +88,8 @@ export class EventoComponent implements OnInit {
 
   adicionar(evento): void {
     this.eventonovo = evento;
+    console.log(evento);
+    
     const file = this.selectedFiles;
     if (file && file.length === 1) {
       this.currentUpload = new Evento(file.item(0));
@@ -109,7 +111,7 @@ export class EventoComponent implements OnInit {
           // success
           if (uploadTask.snapshot.downloadURL) {
               this.currentUpload.titulo = evento.titulo,
-              this.currentUpload.data_evento = evento.data_evento,
+              this.currentUpload.data_evento = new Date(evento.data_evento),
               this.currentUpload.descricao = evento.descricao,
               this.currentUpload.imagem = uploadTask.snapshot.downloadURL;
               this.saveFileData(this.currentUpload);

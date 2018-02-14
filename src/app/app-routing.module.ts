@@ -6,13 +6,16 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import {GrupoComponent } from './grupo/grupo.component';
 import {GrupoDetailComponent} from './grupo-detail/grupo-detail.component';
 import { LoginComponent} from './login/login.component';
-import { AuthGuardService } from './auth-guard.service';
+
+import { AuthGuard } from './core/auth.guard';
+import { CoreModule } from './core/core.module';
+
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   {path:'inicio', component:DashboardComponent},
-  {path: 'eventos', component:EventoComponent},
-  {path: 'grupos', component:GrupoComponent},
+  {path: 'eventos', component:EventoComponent, canActivate: [AuthGuard]},
+  {path: 'grupos', component:GrupoComponent,canActivate: [AuthGuard]},
   {path: 'login', component:LoginComponent}
 
   
@@ -26,8 +29,6 @@ const routes: Routes = [
   exports: [
     RouterModule,
   ],
-  providers:[
-    AuthGuardService
-  ]
+  providers: [AuthGuard],
 })
 export class AppRoutingModule { }

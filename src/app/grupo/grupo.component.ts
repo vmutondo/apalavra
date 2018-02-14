@@ -128,7 +128,7 @@ export class GrupoComponent implements OnInit {
               this.currentUpload.contacto = grupo.contacto, //evento.data_evento
               this.currentUpload.encontro = grupo.encontro,
               this.currentUpload.imagem = uploadTask.snapshot.downloadURL;
-              this.currentUpload.nome_universidade = grupo.nome_universidade;
+              this.currentUpload.nome_universidade = grupo.nome_universidade.nome;
               this.saveFileDataGrupo(this.currentUpload);
           }
 

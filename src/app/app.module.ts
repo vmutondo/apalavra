@@ -15,12 +15,13 @@ import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireStorageModule } from 'angularfire2/storage';
-import {AuthService} from './auth.service';
 import { AngularFireAuthModule } from 'angularfire2/auth';
-import { AuthGuardService } from './auth-guard.service';
+import { CoreModule } from './core/core.module';
 import { HttpClientModule } from '@angular/common/http'; 
 import { HttpModule } from '@angular/http';
 import { HttpClient } from 'selenium-webdriver/http';
+import { NotifyService } from './core/notify.service';
+import { AuthService } from './core/auth.service';
 
 @NgModule({
   declarations: [
@@ -42,8 +43,7 @@ import { HttpClient } from 'selenium-webdriver/http';
     AngularFireStorageModule,
     AngularFireAuthModule
   ],
-  providers: [
-    AuthService,AuthGuardService
+  providers: [AuthService, NotifyService
   ],
   bootstrap: [AppComponent]
 })

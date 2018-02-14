@@ -15,17 +15,17 @@
 					<div id="login-form">
 						<div class="form-group">
 							<label for="email">Email:</label>
-							<input type="text" class="form-control" (ngModel)="email" name="email" id="email" required>
+							<input type="email" class="form-control" id="email" (ngModel)="email" name="email" required >
+							
 						</div>
 						<div class="form-group">
 							<label for="senha">Senha:</label>
-							<input type="password" class="form-control"  (ngModel)="password" name="password" id="password" required>
+							<input type="password" class="form-control" (ngModel)="password"  id="password" name="password" required >
+							
 						</div>
+
 						<button type="submit" [disabled]="!formData.valid" class="btn btn-login" >Login</button>
-					<!--	<button class="btn btn-login" routerLink="/inicio">Login</button> 
-						<button (click)="signInWithGoogle()" class="button btn-social btn-google">
-							<i class="fa fa-google fa-lg"></i> Connect Google
-						  </button>-->
+					
 					</div>
 				</form>
 				

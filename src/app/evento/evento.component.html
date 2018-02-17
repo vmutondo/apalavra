@@ -166,30 +166,40 @@
         <!-- Modal body -->
         <div class="modal-body">
 
-          <form action="post">
+          <form name="form" (ngSubmit)="f.form.valid" #f="ngForm" novalidate>
 
             <div class="form-group">
               <label for="titulo">Titulo do Evento:</label>
-              <input type="txt" [(ngModel)]="eventonovo.titulo" class="form-control" name="titulo" id="titulo">
+
+              <input type="txt" [(ngModel)]="eventonovo.titulo"  class="form-control" name="titulo" #titulo="ngModel" id="titulo" required>
+             
             </div>
+            <div *ngIf="f.submitted && !titulo.valid" class="help-block">é necessário um Titulo</div>
+            
+                   
 
             <div class="form-group">
               <label for="data">Data da Realizacao Evento</label>
-              <input type="datetime-local" [(ngModel)]="eventonovo.data_evento" class="form-control" name="data" id="date">
+              <input type="datetime-local" [(ngModel)]="eventonovo.data_evento" class="form-control" name="data_evento"  #dataEvento="ngModel" id="date" required>
             </div>
+            <div *ngIf="f.submitted && !dataEvento.valid" class="help-block">é necessário uma data valida</div>
 
             <div class="form-group">
               <label for="Dd">Descricao do Evento</label>
-              <textarea name="descricao" [(ngModel)]="eventonovo.descricao" class="form-control" name="descricao" id="" rows="5"></textarea>
+              <textarea  [(ngModel)]="eventonovo.descricao" class="form-control"  name="descricao" #descricao="ngModel" ng-minlength="3"  id="" rows="5" required></textarea>
+              
             </div>
+          
+            <div *ngIf="f.submitted && !descricao.valid" class="help-block">é necessário uma Descricao</div>
 
             <div class="form-group">
               <label for="imagem">Anexar a imagem</label>
-              <input type="file" [(ngModel)]="eventonovo.imagem" (change)="uploadImage($event)" class="form-control" name="imagem" id="file">
+              <input type="file" [(ngModel)]="eventonovo.imagem"  (change)="uploadImage($event)" class="form-control" name="imagem" #imagem="ngModel" id="file">
               <!--(change)="uploadImage($event)"-->
             </div>
+            
 
-            <button type="button" class="btn btn-primary" (click)="adicionar(eventonovo)"  data-dismiss="modal">Salvar</button>
+            <button  type="submit" [disabled]="!f.form.valid" (click)="adicionar(eventonovo)" class="btn btn-primary"  data-dismiss="modal">Salvar</button>
             <button type="button" class="btn btn-danger" (click)="clean()" data-dismiss="modal">Cancelar</button>
 
           </form>
@@ -213,7 +223,7 @@
                     <!-- Modal body -->
                     <div class="modal-body">
             
-                      <form action="post">
+                      <form   action="post" (ngSubmit)="updateEvento(evento)">
             
                         <div class="form-group">
                           <label for="titulo">Titulo do Evento:</label>
@@ -222,21 +232,21 @@
             
                         <div class="form-group">
                           <label for="data">Data da Realizacao Evento</label>
-                          <input type="date" [(ngModel)]="evento.data_evento" class="form-control" name="data" id="date">
+                          <input type="datetime-local" [(ngModel)]="evento.data_evento" class="form-control" name="data" id="date">
                         </div>
             
                         <div class="form-group">
-                          <label for="Dd">Descricao do Evento</label>
+                          <label for="descricao">Descricao do Evento</label>
                           <textarea name="descricao" [(ngModel)]="evento.descricao" class="form-control" name="descricao" id="" rows="5"></textarea>
                         </div>
             
                         <div class="form-group">
                           <label for="imagem">Anexar a imagem</label>
-                          <input type="file" [(ngModel)]="evento.imagem" class="form-control" name="imagem" id="file">
+                          <input type="file"  (change)="uploadImage($event)" class="form-control" name="imagem" id="file">
             
                         </div>
             
-                        <button type="button" class="btn btn-primary" (click)="update(evento)"  data-dismiss="modal">Salvar</button>
+                        <button type="submit" class="btn btn-primary"  data-dismiss="modal">Salvar</button>
                         <button type="button" class="btn btn-danger" (click)="clean()" data-dismiss="modal">Cancelar</button>
             
                       </form>

@@ -6,7 +6,7 @@ import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { Component } from '@angular/core/src/metadata/directives';
 import { EventoComponent } from './evento/evento.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { EventoDetailComponent } from './evento-detail/evento-detail.component'; // <-- NgModel lives here
 import { AppRoutingModule } from './/app-routing.module';
 import { GrupoComponent } from './grupo/grupo.component';
@@ -22,6 +22,9 @@ import { HttpModule } from '@angular/http';
 import { HttpClient } from 'selenium-webdriver/http';
 import { NotifyService } from './core/notify.service';
 import { AuthService } from './core/auth.service';
+import {EventoService } from './evento.service';
+import {GrupoService} from './grupo.service';
+
 
 @NgModule({
   declarations: [
@@ -32,7 +35,8 @@ import { AuthService } from './core/auth.service';
     EventoDetailComponent,
     GrupoComponent,
     GrupoDetailComponent,
-    LoginComponent
+    LoginComponent,
+   
   ],
   imports: [
     BrowserModule,
@@ -41,9 +45,10 @@ import { AuthService } from './core/auth.service';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule.enablePersistence(), 
     AngularFireStorageModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    ReactiveFormsModule
   ],
-  providers: [AuthService, NotifyService
+  providers: [AuthService, NotifyService, EventoService,GrupoService
   ],
   bootstrap: [AppComponent]
 })

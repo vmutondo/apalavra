@@ -6,7 +6,6 @@ export class Evento {
     //static readonly DATE_FMT = 'dd/MMM/yyyy';
   data_evento: Date;
   imagem:string;
-  name:string;
   file:File;
 
    constructor(file:File){

@@ -7,7 +7,7 @@ import 'rxjs/add/operator/map';
 import * as firebase from 'firebase/app';
 import { FirebaseStorage } from '@firebase/storage-types';
 import { AngularFireStorage } from 'angularfire2/storage';
-
+import {GrupoService} from '../grupo.service';
 
 
 @Component({
@@ -16,6 +16,7 @@ import { AngularFireStorage } from 'angularfire2/storage';
   styleUrls: ['./grupo.component.css']
 })
 export class GrupoComponent implements OnInit {
+  toUpdate: Grupo;
   currentUploadU: Universidade;
   currentUpload: Grupo;
   basePath: 'universidades';
@@ -48,7 +49,7 @@ export class GrupoComponent implements OnInit {
     imagem: '',
   };
 
-  constructor(private afs:AngularFirestore, private up: AngularFireStorage ) { }
+  constructor(private afs:AngularFirestore, private up: AngularFireStorage, private gr: GrupoService ) { }
 
   ngOnInit() {
     this.gruposCollection = this.afs.collection('grupos');
@@ -81,19 +82,38 @@ export class GrupoComponent implements OnInit {
     this.gruposDoc.delete();
    }
    
-   editar(grupo: Grupo) {
-    //this.gruposDoc = this.afs.doc(`grupos/${grupo.id}`);
-    //this.grupo = this.gruposDoc;
+   editar(grupo) {
      this.grupo = grupo;
   }
+  updategrupo(grupo) {
+    // this.upSvc.updategrupo(grupo);
+    const file = this.selectedFiles;
+    const updategrupo = {
+      nome_lider : grupo.nome_lider,
+      contacto: grupo.contacto,
+      encontro: grupo.encontro,
+      nome_universidade:grupo.nome_universidade,
+     
+    };
+    if (file && file.length === 1) {
+        // update also the image
+        // this.currentgrupo = new grupo(file.item(0));
+        // this.upSvc.pushgrupo(this.currentgrupo, newgrupo);
+        // this.selectedFiles = null;
+        console.log('new file found');
+        this.toUpdate = new Grupo(file.item(0));
+        this.gr.updateWithImage(grupo, this.toUpdate, updategrupo);
+    } else {
+        // update only realtime db
+        console.error('No file found');
+        console.log(updategrupo);
+        
+        this.gr.updateData(grupo.id, updategrupo);
+    }
+  }
+  
    
-   update(itemToUpdate:Grupo) {
-    this.gruposDoc = this.afs.doc(`grupos/${this.itemToUpdate.id}`);
-    this.gruposDoc.update({ nome_lider: itemToUpdate.nome_lider, contacto: itemToUpdate.contacto, encontro: itemToUpdate.encontro, imagem: itemToUpdate.imagem, nome_universidade:itemToUpdate.nome_universidade
-    }).then(() => {
-      console.log('updated');
-    })
-   }
+   
    
    uploadImage($event: Event){
     this.selectedFiles = ($event.target as HTMLInputElement).files;
@@ -109,7 +129,7 @@ export class GrupoComponent implements OnInit {
       this.currentUpload = new Grupo(file.item(0));
 
       const storageRef = firebase.storage().ref();
-      const uploadTask = storageRef.child(`${this.basePathGrupo}/${this.currentUpload.file.name}`).put(this.currentUpload.file);
+      const uploadTask = storageRef.child(`${'grupos'}/${this.currentUpload.file.name}`).put(this.currentUpload.file);
 
       uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
         (snapshot) => {
@@ -125,7 +145,7 @@ export class GrupoComponent implements OnInit {
           // success
           if (uploadTask.snapshot.downloadURL) {
               this.currentUpload.nome_lider = grupo.nome_lider,
-              this.currentUpload.contacto = grupo.contacto, //evento.data_evento
+              this.currentUpload.contacto = grupo.contacto, //grupo.data_grupo
               this.currentUpload.encontro = grupo.encontro,
               this.currentUpload.imagem = uploadTask.snapshot.downloadURL;
               this.currentUpload.nome_universidade = grupo.nome_universidade.nome;
@@ -177,7 +197,7 @@ adicionarUniversidade(universidade): void {
       this.currentUploadU = new Universidade(file.item(0));
 
       const storageRef = firebase.storage().ref();
-      const uploadTask = storageRef.child(`${this.basePath}/${this.currentUploadU.file.name}`).put(this.currentUploadU.file);
+      const uploadTask = storageRef.child(`${'universidades'}/${this.currentUploadU.file.name}`).put(this.currentUploadU.file);
 
       uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
         (snapshot) => {

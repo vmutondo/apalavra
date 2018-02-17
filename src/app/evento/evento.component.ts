@@ -6,7 +6,9 @@ import 'rxjs/add/operator/map';
 import * as firebase from 'firebase/app';
 import { FirebaseStorage } from '@firebase/storage-types';
 import { AngularFireStorage } from 'angularfire2/storage';
-//import { Event } from '_debugger';
+import {EventoService} from '../evento.service';
+
+
 
 
 
@@ -18,9 +20,8 @@ import { AngularFireStorage } from 'angularfire2/storage';
 
 
 export class EventoComponent implements OnInit {
+  toUpdate: Evento;
 
-  basePath: 'eventos';
-  //@Input() evento_edit:Evento;
   selectedFiles: FileList | null;
   currentUpload: Evento;
 
@@ -39,10 +40,14 @@ export class EventoComponent implements OnInit {
     imagem: '',
   };
 
+ 
 
-  constructor(private afs: AngularFirestore, private up: AngularFireStorage) {
+  constructor(private afs: AngularFirestore, private up: AngularFireStorage, private ev: EventoService) {
+  
+}
 
-  }
+
+
 
   ngOnInit() {
     // this.getEventos();
@@ -65,20 +70,38 @@ export class EventoComponent implements OnInit {
     this.eventosDoc.delete();
   }
 
-  editar(evento: Evento) {
+  editar(evento) {
     //this.eventosDoc = this.afs.doc(`eventos/${evento.id}`);
     //this.evento = this.eventosDoc;
     this.evento = evento;
   }
- 
-  update(itemToUpdate: Evento) {
-    this.eventosDoc = this.afs.doc(`eventos/${this.itemToUpdate.id}`);
-    this.eventosDoc.update({
-      titulo: itemToUpdate.titulo, data_evento: itemToUpdate.data_evento, descricao: itemToUpdate.descricao, imagem: itemToUpdate.imagem
-    }).then(() => {
-      console.log('updated');
-    })
+// update evento
+updateEvento(evento) {
+  // this.upSvc.updateevento(evento);
+  const file = this.selectedFiles;
+  const updateEvento = {
+      titulo: evento.titulo,
+      descricao: evento.descricao,
+      data_evento: new Date(evento.data_evento)
+  };
+  if (file && file.length === 1) {
+      // update also the image
+      // this.currentevento = new evento(file.item(0));
+      // this.upSvc.pushevento(this.currentevento, newevento);
+      // this.selectedFiles = null;
+      console.log('new file found');
+      this.toUpdate = new Evento(file.item(0));
+      this.ev.updateWithImage(evento, this.toUpdate, updateEvento);
+  } else {
+      // update only realtime db
+      console.error('No file found');
+      console.log(updateEvento);
+      
+      this.ev.updateData(evento.id, updateEvento);
   }
+}
+
+
 
   uploadImage($event: Event) {
     //console.log("detect image")
@@ -95,7 +118,7 @@ export class EventoComponent implements OnInit {
       this.currentUpload = new Evento(file.item(0));
 
       const storageRef = firebase.storage().ref();
-      const uploadTask = storageRef.child(`${this.basePath}/${this.currentUpload.file.name}`).put(this.currentUpload.file);
+      const uploadTask = storageRef.child(`${'eventos'}/${this.currentUpload.file.name}`).put(this.currentUpload.file);
 
       uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
         (snapshot) => {

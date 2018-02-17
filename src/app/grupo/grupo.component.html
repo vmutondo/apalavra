@@ -100,30 +100,33 @@
             <!-- Modal body -->
             <div class="modal-body">
     
-              <form action="post">
+              <form name="form" (ngSubmit)="f.form.valid" #f="ngForm" novalidate>
     
                 <div class="form-group">
-                  <label for="titulo">Nome do Lider:</label>
-                  <input type="txt" class="form-control" [(ngModel)]="gruponovo.nome_lider" name="nome_lider" id="titulo">
+                  <label for="titulo">Nome do Lider</label>
+                  <input type="txt" class="form-control" [(ngModel)]="gruponovo.nome_lider" name="nome_lider" #nomeLider="ngModel" id="titulo" required>
                 </div>
+                <div *ngIf="f.submitted && !nomeLider.valid" class="help-block">é necessário um nome</div>
+            
     
                 <div class="form-group">
-                  <label for="contacto">Contacto</label>
-                  <input type="number" [(ngModel)]="gruponovo.contacto" class="form-control" name="contacto" id="number">
+                  <label for="contacto">Contacto do Lider</label>
+                  <input type="number" [(ngModel)]="gruponovo.contacto" class="form-control" name="contacto" #contacto="ngModel" id="number" required>
                 </div>
-
+                <div *ngIf="f.submitted && !contacto.valid" class="help-block">é necessário um Contacto</div>
                 <div class="form-group">
                     <label for="encontro">Encontro</label>
-                    <input type="String" [(ngModel)]="gruponovo.encontro" class="form-control" name="encontro" id="data">
+                    <input type="String" [(ngModel)]="gruponovo.encontro" class="form-control" name="encontro" #encontro="ngModel" id="data" required>
                   </div>
-    
+                  <div *ngIf="f.submitted && !encontro.valid" class="help-block">é necessário uma Descricao</div>
                 <div class="form-group">
                   <label for="nome_universidade">Nome da Universidade</label>
-                  <select [(ngModel)]="gruponovo.nome_universidade" class="item-event"  name="nome_universidade" class="form-control" id="nome_universidade" rows="5">
+                  <select [(ngModel)]="gruponovo.nome_universidade" class="item-event"  name="nome_universidade" class="form-control" #nomeUniversidade="ngModel" id="nome_universidade" rows="5" required>
                     <option *ngFor="let universidade of universidades | async" [ngValue]="universidade">{{universidade.nome}}</option>
                     
                   </select>
                 </div>
+                <div *ngIf="f.submitted && !nomeUniversidade.valid" class="help-block">é necessário um nome</div>
 
                 <div class="form-group">
                   <label for="imagem">Anexar a imagem</label>
@@ -131,7 +134,7 @@
     
                 </div>
     
-                <button type="button" class="btn btn-primary" (click)="adicionar(gruponovo)"  data-dismiss="modal">Salvar</button>
+                <button type="submit" [disabled]="!f.form.valid" class="btn btn-primary" (click)="adicionar(gruponovo)"  data-dismiss="modal">Salvar</button>
                 <button type="button" class="btn btn-danger" (click)="clean()" data-dismiss="modal">Cancelar</button>
     
               </form>
@@ -158,23 +161,23 @@
               <form action="post">
     
                 <div class="form-group">
-                  <label for="titulo">Nome do Lider:</label>
+                  <label for="nome_lider">Nome do Lider</label>
                   <input type="txt" [(ngModel)]="grupo.nome_lider" class="form-control" name="nome_lider" id="titulo">
                 </div>
     
                 <div class="form-group">
-                  <label for="encontro">Contacto do Lider</label>
+                  <label for="contacto">Contacto do Lider</label>
                   <input type="number" [(ngModel)]="grupo.contacto" class="form-control" name="contacto" id="contacto">
                 </div>
     
                 <div class="form-group">
-                  <label for="Dd">Dia do Encontro</label>
-                  <input type="txt" [(ngModel)]="grupo.encontro" class="form-control" name="encontro" id="encontro">
+                  <label for="Dd">Encontro</label>
+                  <input type="txt" [(ngModel)]="grupo.encontro" class="form-control" name="encontro" id="encontro" placeholder="Ex.: Quinta-feira pelas 16h">
                 </div>
 
                 <div class="form-group">
-                  <label for="nomeUniversidade">Nome da Universidade</label>
-                  <select [(ngModel)]="grupo.nomeUniversidade" class="item-event"  name="nomeUniversidade" class="form-control" id="nomeUniversidade" rows="5">
+                  <label for="nome_universidade">Nome da Universidade</label>
+                  <select [(ngModel)]="grupo.nome_universidade" class="item-event"  name="nome_universidade" class="form-control" id="nomeUniversidade" rows="5">
                     <option *ngFor="let universidade of universidades | async" [ngValue]="universidade">{{universidade.nome}}</option>
                     
                   </select>
@@ -182,11 +185,11 @@
 
                 <div class="form-group">
                   <label for="imagem">Anexar a imagem</label>
-                  <input type="file" [(ngModel)]="grupo.imagem" class="form-control" name="imagem" id="file">
+                  <input type="file" class="form-control" (change)="uploadImage($event)" name="imagem" id="file">
     
                 </div>
     
-                <button type="button" class="btn btn-primary" (click)="update(grupo)"  data-dismiss="modal">Salvar</button>
+                <button type="button" class="btn btn-primary" (click)="updategrupo(grupo)"  data-dismiss="modal">Salvar</button>
                 <button type="button" class="btn btn-danger" (click)="clean()" data-dismiss="modal">Cancelar</button>
     
               </form>
@@ -209,11 +212,11 @@
             <!-- Modal body -->
             <div class="modal-body">
     
-              <form action="post">
+              <form name="form" (ngSubmit)="f.form.valid" #f="ngForm" novalidate>
     
                 <div class="form-group">
                   <label for="titulo">Nome da Universidade:</label>
-                  <input type="txt" class="form-control" [(ngModel)]="universidadenovo.nome" name="nome" id="titulo">
+                  <input type="txt" class="form-control" [(ngModel)]="universidadenovo.nome" name="nome" #nome="ngModel" id="titulo" required>
                 </div>
 
                 <div class="form-group">
@@ -222,7 +225,7 @@
                   <input type="file" [(ngModel)]="universidadenovo.imagem" (change)="uploadImage($event)" class="form-control" name="imagem" id="file">
                 </div>
     
-                <button type="button" class="btn btn-primary" (click)="adicionarUniversidade(universidadenovo)"  data-dismiss="modal">Salvar</button>
+                <button type="submit" [disabled]="!f.form.valid" class="btn btn-primary" (click)="adicionarUniversidade(universidadenovo)"  data-dismiss="modal">Salvar</button>
                 <button type="button" class="btn btn-danger" (click)="clean()" data-dismiss="modal">Cancelar</button>
     
               </form>

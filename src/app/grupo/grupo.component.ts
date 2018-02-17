@@ -8,6 +8,7 @@ import * as firebase from 'firebase/app';
 import { FirebaseStorage } from '@firebase/storage-types';
 import { AngularFireStorage } from 'angularfire2/storage';
 import {GrupoService} from '../grupo.service';
+import {EventoService} from '../evento.service';
 
 
 @Component({
